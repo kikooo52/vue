@@ -1,20 +1,35 @@
 <template>
-  <div>
+  <div id="app">
+    <create-todo v-on:create-todo="addTodo"></create-todo>
     <todo-list v-bind:todos="todos"></todo-list>
   </div>
 </template>
 
 <script>
+import sweetalert from 'sweetalert';
 import TodoList from './components/TodoList';
+import CreateTodo from './components/CreateTodo';
 
 export default {
   name: 'App',
   components: {
     TodoList,
+    CreateTodo,
+  },
+  methods: {
+    addTodo(newTodo) {
+      this.todos.unshift(newTodo);
+      sweetalert('Success!', 'To-Do created!', 'success');
+    },
   },
   data() {
     return {
-      todos: [{
+      todos: [
+        {
+        title: 'Test bala',
+        project: 'Project six',
+        done: true,
+      },{
         title: 'Todo A',
         project: 'Project A',
         done: false,
